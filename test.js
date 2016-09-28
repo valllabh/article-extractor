@@ -5,6 +5,10 @@ var async = require('async');
 
 var articlesToParse = [
   {
+    url: 'https://techcrunch.com/2016/09/27/everything-you-need-to-know-about-spacexs-plan-to-colonize-mars/',
+    filename: 'techcrunch'
+  },
+  {
     url: 'http://gizmodo.com/watch-a-single-day-on-the-london-tube-in-two-minutes-1692810056',
     filename: 'gizmodo'
   },
@@ -40,8 +44,7 @@ var articlesToParse = [
 
 async.each(articlesToParse, function (articleToParse, parseCallback) {
   extractor.extractData(articleToParse.url, function (err, data) {
-    console.log('Parsed article:', data.title);
-    console.log(data.summary);
+    console.log(data.title);
     console.log('-----');
     fs.writeFileSync(path.join(process.cwd(), 'data/' + articleToParse.filename + '.html'), data.content);
     parseCallback();
